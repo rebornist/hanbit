@@ -1,0 +1,16 @@
+1. yarn 설치 : https://yarnpkg.com/lang/en/docs/install/#windows-stable
+2. yarn init
+3. yarn global add parcel-bundler node-sass
+4. yarn add babel-preset-env bable-preset-es2015 tailwindcss postcss-modules typography
+5. index.html & index.js 생성 후 연동
+6. postcss.config.js 생성 후
+module.exports = {
+  theme: {},
+  variants: {},
+  plugins: [require("tailwindcss")]
+};
+설정
+7. styles.scss 생성 후 @tailwind base;, @tailwind components;, @tailwind utilities; 추가
+8. index.js에 import styles from "./styles.scss"; 추가
+9. parcel index.html 입력 또는 package.json에 "scripts": {"start": "parcel index.html"}을 추가하여 yarn start 입력
+10. package.json "scripts"에 {"build": "parcel build index.html -d build --public-url ./"} 추가
