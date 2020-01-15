@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<div class="h-80vh w-full flex justify-center items-center">
+    <div class="absolute h-80vh w-full bg-gray-600 opacity-25"></div>
+    <div
+        class="absolute block opacity-100 flex flex-wrap justify-center items-center text-white text-center h-20vh w-3/5 px-20 z-10">
+        <p class="w-full font-normal text-5xl my-0 py-0">
+            Arise, shine, for your light has come,<br />
+            and the glory of the LORD rises upon you
+        </p>
+        <p class="border-t-2 border-white w-24 mb-24"></p>
+    </div>
+    <img class="object-cover h-full w-full" src="{% static "img/hanbitchurch.jpg" %}" alt="" srcset="">
+</div>
+<div class="w-full flex justify-center items-center mb-24">
+    <div class="w-3/5 flex-wrap justify-center z-10">
+        <div class="bg-white h-25vh w-full -mt-48 rounded-sm shadow-lg"></div>
+        <div class="bg-white h-full w-full -mt-64">
+            <p class="text-gray-600 px-32 py-5 font-nanum text-xl font-light leading-loose">
+                <span class="font-bold text-6xl leading-tight">이</span>
+                땅에 거룩한 하나님 나라 공동체를 세워나가는 한빛교회입니다.
+                ‘한빛’에는 세 가지 뜻이 있습니다.
+            </p>
+            <p class="text-gray-600 px-32 py-5 font-nanum text-xl font-light leading-loose">
+                첫째로 빛은 유일하신 창조주 하나님이시며 예수 그리스도이십니다.
+                교회의 가장 중요한 본질은 하나님의 임재입니다.
+                “여호와께서 그에게 이르시되 네 기도와 네가 내 앞에서 간구한 바를 내가 들었은즉 나는 네가 건축한 이 성전을 거룩하게 구별하여 내 이름을
+                영원히 그 곳에 두며 내 눈길과 내 마음이 항상 거기에 있으리니”(왕상9:3)
+                우리는 기도하던 솔로몬에게 약속하셨던 하나님의 임재를 믿으며, 그분의 임재가 우리 안에 가득하기를 갈망합니다.
+            </p>
+            <p class="text-gray-600 px-32 py-5 font-nanum text-xl font-light leading-loose">
+                둘째로 빛은 우리들입니다.
+                우리는 예수님께서 우리를 빛으로 부르신 사명을 믿습니다.
+                “내가 또 너를 이방의 빛으로 삼아 나의 구원을 베풀어서 땅 끝까지 이르게 하리라”(사49:6) 사명은 우리의 존재 이유입니다.
+                우리는 끝까지 하나님의 말씀을 붙들고 진리와 씨름합니다.
+                그리고 이 시대에 교회공동체의 존재 이유를 고민하며 그분의 뜻과 사명을 붙들기를 갈망합니다.
+            </p>
+            <p class="text-gray-600 px-32 py-5 font-nanum text-xl font-light leading-loose">
+                셋째로 빛은 하나됨입니다.
+                우리는 예수님 때문에, 그 분의 사랑의 피로 인하여 한 몸이 되었습니다. 다른 이유는 없습니다.
+                빛은 각자의 다양한 색을 가지고 있지만 하나 되었을 때는 단지 밝음이 됩니다.
+                자신을 드러내기보다 남을 드러내주기 때문에 빛은 깊음이 있고 위대함이 있습니다.
+                우리는 빛의 자녀로서 자신을 드러내기보다 남을 나보다 더 빛나게 해주며, 서로 섬김의 종노릇하기를 즐거워하는 공동체입니다.
+            </p>
+            <p class="w-full px-32 py-5">
+                <img src="{% static "img/hht.jpg" %}" alt="한빛교회 단체사진" class="shadow-lg">
+            </p>
+            <p class="text-gray-600 px-32 py-5 font-nanum text-xl font-light leading-loose">
+                <span class="block text-2xl font-semibold">그리스도인의 올바른 정체성과 섬김을 통해 참된 교회를 이루어가는 한빛교회</span>
+                한빛은 하나님의 이름이며 우리 공동체의 이름입니다. 우리는 하나님의 임재가 가득하기를 갈망합니다.
+                우리는 하나님의 사명을 붙들기를 갈망합니다. 우리는 주안에서 하나 되기를 갈망합니다.
+                이로 인하여 한빛공동체로 모인 우리들이 하나님을 기쁘시게 하며 세상을 살리는 위대한 빛이 되기를 소망합니다.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="h-80vh w-full">
+    <div class="pt-page-scaleDown">
+        dd
+    </div>
+</div>
+{% endblock content %}

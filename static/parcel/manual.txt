@@ -1,16 +1,20 @@
+# parcel 세팅
 1. yarn 설치 : https://yarnpkg.com/lang/en/docs/install/#windows-stable
 2. yarn init
 3. yarn global add parcel-bundler node-sass
-4. yarn add babel-preset-env bable-preset-es2015 tailwindcss postcss-modules typography
-5. index.html & index.js 생성 후 연동
-6. postcss.config.js 생성 후
+
+# tailwindcss 세팅
+1. yarn add babel-preset-env bable-preset-es2015 tailwindcss postcss-modules postcss-cli
+2. postcss.config.js 생성 후
 module.exports = {
-  theme: {},
-  variants: {},
   plugins: [require("tailwindcss")]
 };
-설정
-7. styles.scss 생성 후 @tailwind base;, @tailwind components;, @tailwind utilities; 추가
-8. index.js에 import styles from "./styles.scss"; 추가
-9. parcel index.html 입력 또는 package.json에 "scripts": {"start": "parcel index.html"}을 추가하여 yarn start 입력
-10. package.json "scripts"에 {"build": "parcel build index.html -d build --public-url ./"} 추가
+추가
+3. styles.scss 생성 후 @tailwind base; @tailwind components; @tailwind utilities; 추가
+4. package.json "scripts"에 {"build:css": "postcss styles.scss -o ../css/tailwind.css"} 추가
+   또는 base.js 생성 후 import tailwindcss from "./styles.scss";
+
+# bootstrap 세팅
+1. yarn add jquery popper.js bootstrap
+2. ackage.json "scripts"에 {"build": "parcel build base.js -d ../js"} 추가
+3. base.js 생성 후 import $ from "jquery"; import popper from "popper.js"; import bootstrap from "bootstrap"; 추가

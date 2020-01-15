@@ -4,11 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html -d ../../templates --public-url ./"
+    "start": "parcel base.html",
+    "build": "parcel build base.js -d ../base",
+    "build:css": "postcss styles.scss -o ../css/tailwind.css"
   },
   "dependencies": {
     "autoprefixer": "^9.7.4",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.0",
+    "postcss-cli": "^7.1.0",
     "postcss-modules": "^1.5.0",
     "tailwindcss": "^1.1.4",
     "typography": "^0.16.19"

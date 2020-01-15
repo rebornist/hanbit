@@ -5,7 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>{% block Title %}{% endblock Title %} | 한빛교회</title>
+    <title>{% block title %}{% endblock title %} | 한빛교회</title>
+    <link rel="stylesheet" href="{% static 'base/base.css' %}" />
   </head>
-  <body></body>
+  <body>
+    {% include "partials/nav.html" %}
+
+    {% block content %}
+    {% endblock content %}
+    
+    {% include "partials/footer.html" %}
+    <script src="{% static 'base/base.js' %}"></script>
+  </body>
 </html>
