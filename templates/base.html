@@ -1,20 +1,49 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html dir="ltr" lang="zxx">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
     <title>{% block title %}{% endblock title %} | 한빛교회</title>
-    <link rel="stylesheet" href="{% static 'base/base.css' %}" />
-  </head>
-  <body>
-    {% include "partials/nav.html" %}
+    <meta
+      name="description"
+      content="The Project a Bootstrap-based, Responsive HTML5 Template"
+    />
+    <meta name="author" content="author" />
 
-    {% block content %}
-    {% endblock content %}
-    
-    {% include "partials/footer.html" %}
-    <script src="{% static 'base/base.js' %}"></script>
+    <!-- Mobile Meta -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'img/hanbitchurch.ico' %}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700|Muli:200,300,400|Nanum+Gothic:400,700|Noto+Sans+KR:100,300,400&display=swap"
+    />
+    <link rel="stylesheet" href="{% static 'base/css/styles.css' %}" />
+  </head>
+  <!-- body classes:  -->
+  <!-- "boxed": boxed layout mode e.g. <body class="boxed"> -->
+  <!-- "pattern-1 ... pattern-9": background patterns for boxed layout mode e.g. <body class="boxed pattern-1"> -->
+  <!-- "transparent-header": makes the header transparent and pulls the banner to top -->
+  <!-- "gradient-background-header": applies gradient background to header -->
+  <!-- "page-loader-1 ... page-loader-6": add a page loader to the page (more info @components-page-loaders.html) -->
+  <body class="front-page ">
+    <!-- page wrapper start -->
+    <!-- ================ -->
+    <div class="page-wrapper">
+      <!-- header-container start -->
+      <div class="header-container">
+        {% include "partials/nav.html" %}
+
+        {% block content %}
+        {% endblock content %}
+        
+        {% include "partials/footer.html" %}
+      </div>
+    </div>
+    <script src="{% static 'base/js/index.js' %}"></script>
   </body>
 </html>
