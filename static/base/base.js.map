@@ -1,1 +1,0 @@
-{"version":3,"sources":["base.js"],"names":[],"mappings":";;;AAGA,aAAA,IAAA,EAAA,EAAA,QAAA,kBAAA,SAAA,EAAA,GAAA,OAAA,GAAA,EAAA,WAAA,EAAA,CAAA,QAAA","file":"base.js","sourceRoot":"..\\parcel","sourcesContent":["// import $ from \"jquery\";\r\n// import popper from \"popper.js\";\r\n// import bootstrap from \"bootstrap\";\r\nimport tailwindcss from \"./styles.scss\";\r\n"]}

@@ -2,6 +2,52 @@
 
 <!-- header-container start -->
 <div class="header-container">
+  <!-- header-top start -->
+  <!-- classes:  -->
+  <!-- "dark": dark version of header top e.g. class="header-top dark" -->
+  <!-- "colored": colored version of header top e.g. class="header-top colored" -->
+  <!-- ================ -->
+  <div class="header-top colored">
+    <div class="container">
+      <div class="row">
+        <div class="col-3 col-sm-6 col-lg-9">
+          <!-- header-top-first start -->
+          <!-- ================ -->
+          <div class="header-top-first clearfix">
+            <ul class="list-inline hidden-md-down">
+              <li class="list-inline-item"><i class="fa fa-map-marker pr-1 pl-2"></i> 충남 예산군 삽교읍 수촌학재길 141</li>
+              <li class="list-inline-item"><i class="fa fa-phone pr-1 pl-2"></i> 041-337-4971</li>
+              <li class="list-inline-item"><i class="fa fa-envelope-o pr-1 pl-2"></i> gebba@hanmail.net</li>
+            </ul>
+          </div>
+          <!-- header-top-first end -->
+        </div>
+        <div class="col-9 col-sm-6 col-lg-3">
+
+          <!-- header-top-second start -->
+          <!-- ================ -->
+          <div id="header-top-second"  class="clearfix">
+
+            <!-- header top dropdowns start -->
+            <!-- ================ -->
+            <div class="header-top-dropdown text-right">
+              <div class="btn-group">
+                {% if user.is_active %}
+                <a href="{% url 'users:logout' %}" type="button" class="btn btn-default btn-sm"><i class="fa fa-unlock pr-2"></i> Logout</a>
+                {% else %}
+                <a href="{% url 'users:login' %}" type="button" class="btn btn-default btn-sm"><i class="fa fa-lock pr-2"></i> Login</a>
+                {% endif %}
+              </div>
+            </div>
+            <!--  header top dropdowns end -->
+          </div>
+          <!-- header-top-second end -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- header-top end -->
+  
   <!-- header start -->
   <!-- classes:  -->
   <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
@@ -11,7 +57,8 @@
   <!-- "centered": mandatory class for the centered logo layout -->
   <!-- ================ -->
   <header class="header fixed fixed-desktop clearfix text-noto">
-    <div class="container">
+    
+    <div class="container header-navbar">
       <div class="row">
         <div class="col-md-auto hidden-md-down pl-3">
           <!-- header-first start -->

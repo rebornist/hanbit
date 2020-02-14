@@ -1,3 +1,4 @@
+{% load static %}
 <!-- footer start (Add "dark" class to #footer in order to enable dark footer) -->
 <!-- ================ -->
 <footer id="footer" class="clearfix dark text-white text-noto">
@@ -98,7 +99,7 @@
                   <div class="row justify-content-lg-center mx-1 bg-light">
                     <div
                       id="map"
-                      style="height:100pt;width:100%;background-image:url('../static/img/navermap.png');background-position:center;"
+                      style="height:100pt;width:100%;background-image:url('{% static 'img/navermap.png' %}');background-position:center;"
                     ></div>
                   </div>
                 </div>
