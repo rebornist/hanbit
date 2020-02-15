@@ -32,7 +32,7 @@ class Sermon(core_models.TimeStampedModel):
     )
 
     title = models.CharField(max_length=140)
-    gender = models.CharField(choices=TYPE_CHOICES, max_length=15, blank=True)
+    post_type = models.CharField(choices=TYPE_CHOICES, max_length=15, blank=True)
     content = models.TextField()
     author = models.ForeignKey(User, related_name="Sermons", on_delete=models.CASCADE)
 
