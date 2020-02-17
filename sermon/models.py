@@ -1,23 +1,25 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 from core import models as core_models
+
+from ckeditor.fields import RichTextField
+from hitcount.models import HitCountMixin
 
 
 class Photo(core_models.TimeStampedModel):
 
     """ Photo Model Definition """
 
-    caption = models.CharField(max_length=80)
-    files = models.ImageField(upload_to="sermon_photos")
-    room = models.ForeignKey("Sermon", related_name="photos", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.caption
+    files = models.ImageField(upload_to="sermon")
+    sermon = models.ForeignKey(
+        "Sermon", related_name="photos", on_delete=models.CASCADE
+    )
 
 
-class Sermon(core_models.TimeStampedModel):
+class Sermon(core_models.TimeStampedModel, HitCountMixin):
 
     """ Sermon Model Definition """
 
@@ -33,12 +35,14 @@ class Sermon(core_models.TimeStampedModel):
 
     title = models.CharField(max_length=140)
     post_type = models.CharField(choices=TYPE_CHOICES, max_length=15, blank=True)
-    content = models.TextField()
-    author = models.ForeignKey(User, related_name="Sermons", on_delete=models.CASCADE)
+    content = RichTextField()
+    author = models.ForeignKey(
+        User, related_name="Sermon_author", on_delete=models.CASCADE
+    )
 
     def get_absolute_url(self):
         return reverse("sermon:detail", kwargs={"pk": self.pk})
 
-    def photos(self):
+    def get_photos(self):
         photos = self.photos.all()
         return photos

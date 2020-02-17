@@ -1,24 +1,10 @@
 from django import forms
+from ckeditor.widgets import CKEditorWidget
 
 from . import models
 
 
-class CreatePhotoForm(forms.ModelForm):
-    class Meta:
-        model = models.Photo
-        fields = (
-            "caption",
-            "files",
-        )
-
-    def save(self, pk, *args, **kwargs):
-        photo = super().save(commit=False)
-        sermon = models.Sermon.objects.get(pk=pk)
-        photo.sermon = sermon
-        photo.save()
-
-
-class CreateSermonForm(forms.ModelForm):
+class SermonForm(forms.ModelForm):
     class Meta:
 
         model = models.Sermon
@@ -47,14 +33,7 @@ class CreateSermonForm(forms.ModelForm):
                 attrs={"class": "form-control", "id": "post_type", "name": "post_type"},
                 choices=TYPE_CHOICES,
             ),
-            "content": forms.Textarea(
-                attrs={
-                    "rows": 15,
-                    "class": "form-control",
-                    "id": "content",
-                    "name": "content",
-                }
-            ),
+            "content": CKEditorWidget(),
         }
 
     def save(self, *args, **kwargss):

@@ -12,6 +12,7 @@ urlpatterns = [
     path("sermon/", include("sermon.urls", namespace="sermon")),
     path("board/", include("board.urls", namespace="board")),
     path("gallary/", include("gallary.urls", namespace="gallary")),
+    path("ckeditor/", include("ckeditor_uploader.urls")),
 ]
 
 

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{sermon.title}} 수정{% endblock title %}
+{% block content %}
+
+<div class="main-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <!-- main start -->
+        <!-- ================ -->
+        <div class="main">
+          <div class="form-block p-30 light-gray-bg border-clear">
+            <h2 class="title">{{sermon.title}} 수정</h2>
+
+            <form method="post" class="form-horizontal" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              {% if form.non_field_errors %}
+              {% for error in form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+                {{error}}
+              </div>
+              {% endfor %}
+              {% endif %}
+
+              <div class="form-group">
+                <label for="photos">Photo Upload</label>
+                <input type="file" class="form-control" id="photos" name="photos" multiple />
+                <div class="photo-thumb-list" style="display:flex;flex-wrap:wrap;align-self:center;">
+                  
+                  {% for photo in sermon.get_photos %}
+                  <div class="overlay-container" style="width:20%;padding:1px;display:flex;justify-content:center;align-items:center;">
+                    <img src="{{photo.files}}" style="max-height:100px;" alt="" srcset="">
+                    <a href="{% url 'sermon:photo_delete' sermon.pk photo.pk %}" class="overlay-link small">
+                      <i class="fa fa-close"></i>
+                    </a>
+                    <div class="demo"></div>
+                  </div>
+                  {% endfor %}
+                    
+                </div>
+              </div>
+
+              {% for field in form %}
+
+              <div class="form-group">
+                <label for="title">{{field.label}}</label>
+                {{field}}
+                
+                {% if field.errors %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger" role="alert">
+                  {{error}}
+                </div>
+                {% endfor %}
+                {% endif %}
+              </div>
+
+              {% endfor %}
+              <button type="submit" class="btn btn-default">글 수정</button>
+              <a href="{% url 'sermon:detail' sermon.pk %}" class="btn btn-danger text-white">나가기</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+<script type="text/javascript" src="{% static "base/js/ajax_test.js" %}"></script>
+
+{% endblock content %}
