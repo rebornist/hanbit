@@ -18,31 +18,39 @@
         <div class="separator-2 mb-20"></div>
         <!-- page-title end -->
 
+        {% if request.user.is_authenticated %}
+        <div class="text-right">
+          <a href="{% url 'board:create' %}" class="btn btn-sm btn-default">글 작성</a>
+        </div>
+        {% endif %}
+        
+        {% for board in object_list %}
         <div class="image-box style-3-b">
           <div class="row">
+            
             <div class="col-md-6 col-lg-4 col-xl-3">
               <div class="overlay-container img-sm-center">
-                <img src="{% static 'img/bibleworkbook.jpg' %}" alt="" />
+                {% if board.first_photo %}
+                <img src="{{board.first_photo}}" style="max-height:163px;" alt="{{board.title}} 대표사진" />
+                {% else %}
+                <img src="{% static 'img/logo.png' %}" style="max-height:163px;" alt="" srcset="">
+                {% endif %}
               </div>
             </div>
+              
             <div class="col-md-6 col-lg-8 col-xl-9">
               <div class="body">
                 <h3 class="title">
-                  <a href="">Project Title</a>
+                  <a href="{% url 'board:detail' board.pk %}">{{board.title|truncatechars:45}}</a>
                 </h3>
                 <p class="small mb-10">
-                  <i class="fa fa-calendar-o pr-1"></i> Feb, 2017
-                  <i class="pl-10 pr-1 fa fa-tag"></i> Web Design
-                </p>
+                  <i class="fa fa-calendar-o pr-1"></i> {{board.created}}
                 <div class="separator-2"></div>
                 <p class="mb-10">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Aliquam atque ipsam nihialal. Lorem ipsum dolor sit amet,
-                  consectetur adipisicing elit. Nam laudantium, provident culpa
-                  saepe.
+                  {{board.content|truncatechars:130|striptags}}
                 </p>
                 <a
-                  href=""
+                  href="{% url 'board:detail' board.pk %}"
                   class="btn btn-default-transparent btn-animation btn-animation--slide-horizontal margin-clear"
                   >Read More<i class="fa fa-arrow-right pl-10"></i
                 ></a>
@@ -50,32 +58,36 @@
             </div>
           </div>
         </div>
+        {% endfor %}
 
         <!-- pagination start -->
         <nav aria-label="Page navigation">
           <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
             <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
+              <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
                 <i aria-hidden="true" class="fa fa-angle-left"></i>
                 <span class="sr-only">Previous</span>
               </a>
             </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
+            {% endif %}
+            
+            <li class="page-item mt-2 mx-4" style="display:flex;justify-content:center;align-items:center;">
+              <h5>{{page_obj.number}} of {{page_obj.paginator.num_pages}}</h5>
             </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
+
+            {% if page_obj.has_next %}
+            <li class="page-item ml-2">
+              <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
                 <i aria-hidden="true" class="fa fa-angle-right"></i>
                 <span class="sr-only">Next</span>
               </a>
             </li>
+            {% endif %}
           </ul>
         </nav>
         <!-- pagination end -->
+        
       </div>
       <!-- main end -->
     </div>

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{sermon.title}} 삭제{% endblock title %}
+{% block content %}
+
+<div class="main-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <!-- main start -->
+        <!-- ================ -->
+        <div class="main">
+          <div class="form-block p-30 light-gray-bg border-clear">
+            <h2 class="title">글 작성</h2>
+
+            <form action="{% url 'sermon:delete' sermon.pk %}" method="post" id="postDeleteForm">
+              {% csrf_token %}
+              <div class="modal-content"> 
+                <div class="modal-header bg-danger">
+                  <h4 class="modal-title" id="myModalLabel">[Warning]글 삭제</h4>
+                </div>
+                <div class="modal-body">
+                  <p>{{sermon.title}}을(를) 삭제하시겠습니까?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-sm btn-danger">삭제</button>
+                  <a href="{% url 'sermon:sermon_list' %}" class="btn btn-sm btn-default">나가기</a>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

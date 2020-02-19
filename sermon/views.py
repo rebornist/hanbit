@@ -2,8 +2,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, JsonResponse
-from django.shortcuts import render, redirect, reverse
-from django.views.generic import DetailView, FormView, UpdateView
+from django.shortcuts import redirect, reverse
+from django.views.generic import DetailView, FormView, ListView, UpdateView
 
 from core.file_uploads import file_uploads
 from users import mixins as user_mixins
@@ -14,11 +14,17 @@ import os
 from hitcount.views import HitCountDetailView
 
 
-def sermon_list(request):
-    return render(request, "sermon/sermon_list.html")
+class SermonListView(ListView):
+
+    """ HomeView Definition """
+
+    model = models.Sermon
+    paginate_by = 10
+    paginate_orphans = 5
+    ordering = "created"
 
 
-class SermonDetail(DetailView):
+class SermonDetail(HitCountDetailView, DetailView):
 
     """ SermonDetail Definition """
 
@@ -36,9 +42,8 @@ class SermonCreateView(user_mixins.LoggedInOnlyView, FormView):
         sermon.author = self.request.user
         sermon.save()
         for i in self.request.FILES.getlist("photos"):
-            upload_url = file_uploads(i, f"sermon/{sermon.pk}")
+            upload_url = file_uploads(i, "sermon/{}".format(sermon.pk))
             models.Photo.objects.create(sermon=sermon, files=upload_url)
-        messages.success(self.request, "Sermon created")
         return redirect(reverse("sermon:detail", kwargs={"pk": sermon.pk}))
 
 
@@ -53,9 +58,8 @@ class SermonEditView(user_mixins.LoggedInOnlyView, UpdateView):
         sermon.author = self.request.user
         sermon.save()
         for i in self.request.FILES.getlist("photos"):
-            upload_url = file_uploads(i, f"sermon/{sermon.pk}")
+            upload_url = file_uploads(i, "sermon/{}".format(sermon.pk))
             models.Photo.objects.create(sermon=sermon, files=upload_url)
-        messages.success(self.request, "Sermon created")
         return redirect(reverse("sermon:detail", kwargs={"pk": sermon.pk}))
 
     def get_object(self, queryset=None):
@@ -63,6 +67,19 @@ class SermonEditView(user_mixins.LoggedInOnlyView, UpdateView):
         if sermon.author.pk != self.request.user.pk:
             raise Http404()
         return sermon
+
+
+@login_required
+def delete_post(request, pk):
+    user = request.user
+    sermon = models.Sermon.objects.get(pk=pk)
+
+    if sermon.author.pk != user.pk:
+        messages.error(request, "Cant delete that post")
+    else:
+        sermon.delete()
+        messages.success(request, "Successfully deleted post")
+    return redirect(reverse("sermon:sermon_list"))
 
 
 @login_required
@@ -74,12 +91,12 @@ def delete_photo(request, sermon_pk, photo_pk):
             data = {"message": "Cant delete that photo"}
         else:
             photo = models.Photo.objects.get(pk=photo_pk)
-            filepath = settings.MEDIA_ROOT + f"{photo.files}".replace(
+            filepath = settings.MEDIA_ROOT + "{}".format(photo.files).replace(
                 "/media", ""
             ).replace("/", "\\")
             os.remove(filepath)
             photo.delete()
-            data = {"message": "Photo deleted"}
+            data = {"message": "Successfully deleted photo"}
         return JsonResponse(data)
     except models.Sermon.DoesNotExist:
         return redirect(reverse("core:index"))

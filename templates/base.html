@@ -23,7 +23,7 @@
       href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700|Muli:200,300,400|Nanum+Gothic:400,700|Noto+Sans+KR:100,300,400&display=swap"
     />
     <link rel="stylesheet" href="{% static 'base/css/styles.css' %}" />
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=clinetId"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=oz27o9oz3t"></script>
   </head>
   <!-- body classes:  -->
   <!-- "boxed": boxed layout mode e.g. <body class="boxed"> -->
@@ -38,6 +38,8 @@
       <!-- header-container start -->
       <div class="header-container">
         {% include "partials/nav.html" %}
+
+        <div class="alert message hidden"></div>
 
         {% block content %}
         {% endblock content %}

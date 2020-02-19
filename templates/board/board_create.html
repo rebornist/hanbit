@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}{{sermon.title}} 수정{% endblock title %}
+{% block title %}겔러리 작성{% endblock title %}
 {% block content %}
 
 <div class="main-container">
@@ -11,7 +11,7 @@
         <!-- ================ -->
         <div class="main">
           <div class="form p-30 light-gray-bg border-clear">
-            <h2 class="title">{{sermon.title}} 수정</h2>
+            <h2 class="title">글 작성</h2>
 
             <form method="post" class="form-horizontal" enctype="multipart/form-data">
               {% csrf_token %}
@@ -27,19 +27,6 @@
               <div class="form-group">
                 <label for="photos">Photo Upload</label>
                 <input type="file" class="form-control" id="photos" name="photos" multiple />
-                <div class="photo-thumb-list" style="display:flex;flex-wrap:wrap;align-self:center;">
-                
-                  {% for photo in sermon.get_photos %}
-                  <div class="overlay-container" style="width:20%;padding:1px;display:flex;justify-content:center;align-items:center;">
-                    <img src="{{photo.files}}" style="max-height:100px;" alt="" srcset="">
-                    <a href="{% url 'sermon:photo_delete' sermon.pk photo.pk %}" class="overlay-link small">
-                      <i class="fa fa-close"></i>
-                    </a>
-                    <div class="demo"></div>
-                  </div>
-                  {% endfor %}
-                    
-                </div>
               </div>
 
               {% for field in form %}
@@ -58,8 +45,8 @@
               </div>
 
               {% endfor %}
-              <button type="submit" class="btn btn-default">글 수정</button>
-              <a href="{% url 'sermon:detail' sermon.pk %}" class="btn btn-danger text-white">나가기</a>
+              <button type="submit" class="btn btn-default">글 작성</button>
+              <a href="{% url 'gallary:gallary_list' %}" class="btn btn-danger text-white">나가기</a>
             </form>
           </div>
         </div>

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load hitcount_tags %}
 {% load static %}
-{% block title %}설교·묵상{% endblock title %}
+{% block title %}겔러리{% endblock title %}
 {% block content %}
 
 <!-- main-container start -->
@@ -14,16 +14,7 @@
       <div class="main col-lg-12">
         <!-- page-title start -->
         <!-- ================ -->
-        <h1 class="page-title">[
-        {% if sermon.post_type == "column" %} 
-        칼럼
-        {% elif sermon.post_type == "contemplation" %}
-        묵상
-        {% else %}
-        설교
-        {% endif %}
-        ]
-        {{sermon.title}}</h1>
+        <h1 class="page-title">{{gallary.title}}</h1>
         <!-- page-title end -->
 
         <!-- blogpost start -->
@@ -33,15 +24,15 @@
             <div class="post-info mb-4">
               <span class="post-date">
                 <i class="fa fa-calendar-o pr-1"></i>
-                <span class="date">{{sermon.created}}</span>
+                <span class="date">{{gallary.created}}</span>
               </span>
               <span class="submitted">
                 <i class="fa fa-user pr-1 pl-1"></i> by
-                {{sermon.author}}
+                {{gallary.author}}
               </span>
               <span class="search">
                 <i class="fa fa-search pl-1 pr-1"></i>
-                {% get_hit_count for sermon %}
+                {% get_hit_count for gallary %}
               </span>
             </div>
           </header>
@@ -53,7 +44,7 @@
             > 
             
               <ol class="carousel-indicators">
-                {% for photo in sermon.get_photos %}
+                {% for photo in gallary.get_photos %}
                 
                 {% if photo.files != "" %}
                 <!-- Indicators -->
@@ -68,7 +59,7 @@
               </ol>
               <!-- Wrapper for slides -->
               <div class="carousel-inner" role="listbox">
-                {% for photo in sermon.get_photos %}
+                {% for photo in gallary.get_photos %}
                 {% if photo.files != "" %}
                 <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
                   <div class="overlay-container" style="display:flex;justify-content:center;">
@@ -81,12 +72,12 @@
             </div>
 
             <p>
-              {{sermon.content|safe}}
+              {{gallary.content|safe}}
             </p>
 
-            <a href="{% url 'sermon:sermon_list' %}" class="btn btn-outline border-secondary text-secondary">목록보기</a>
-            {% if sermon.author == request.user or request.user.is_superuser %}  
-            <a href="{% url 'sermon:edit' sermon.pk %}" class="btn btn-outline border-success text-success">수정</a>
+            <a href="{% url 'gallary:gallary_list' %}" class="btn btn-outline border-secondary text-secondary">목록보기</a>
+            {% if gallary.author == request.user or request.user.is_superuser %}  
+            <a href="{% url 'gallary:edit' gallary.pk %}" class="btn btn-outline border-success text-success">수정</a>
             <a id="modal_open" class="btn btn-outline border-danger text-danger">삭제</a>
             {% endif %}
               
@@ -103,7 +94,7 @@
 <!-- Modal -->
 <div class="myModal hidden">
   <div class="modal-dialog">
-    <form action="{% url 'sermon:delete' sermon.pk %}" method="post" id="postDeleteForm">
+    <form action="{% url 'gallary:delete' gallary.pk %}" method="post" id="postDeleteForm">
       {% csrf_token %}
       <div class="modal-content"> 
         <div class="modal-header bg-danger">
@@ -111,7 +102,7 @@
           <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
         </div>
         <div class="modal-body">
-          <p>{{sermon.title}}을(를) 삭제하시겠습니까?</p>
+          <p>{{gallary.title}}을(를) 삭제하시겠습니까?</p>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-sm btn-danger post-delete-btn">삭제</button>

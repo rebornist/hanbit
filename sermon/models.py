@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
-from django.utils import timezone
 
 from core import models as core_models
 
@@ -46,3 +45,10 @@ class Sermon(core_models.TimeStampedModel, HitCountMixin):
     def get_photos(self):
         photos = self.photos.all()
         return photos
+
+    def first_photo(self):
+        try:
+            (photo,) = self.photos.all()[:1]
+            return photo.files
+        except:
+            return None

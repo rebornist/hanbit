@@ -28,12 +28,8 @@
               {% for field in form %}
 
               <div class="form-group has-feedback row">
-                
-                {% if field.label == "Captcha" %}
-                <div class="col-md-3"></div>
-                {% else %}
-                <label for="inputUserName" class="col-md-3 text-md-right control-label col-form-label">{{field.label}}</label>
-                {% endif %}
+
+                <div class="col-md-3">{{field.label}}</div>
                   
                 <div class="col-md-8">
                   {{field}}

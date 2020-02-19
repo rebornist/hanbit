@@ -29,6 +29,5 @@ class LoginView(mixins.LoggedOutOnlyView, FormView):
 
 
 def log_out(request):
-    messages.info(request, f"See you later {request.user.username}")
     logout(request)
     return redirect(reverse("core:index"))
