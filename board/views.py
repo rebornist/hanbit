@@ -10,6 +10,7 @@ from users import mixins as user_mixins
 from . import models
 from . import forms
 import os
+import shutil
 
 from hitcount.views import HitCountDetailView
 
@@ -78,6 +79,8 @@ def delete_post(request, pk):
         messages.error(request, "Cant delete that post")
     else:
         board.delete()
+        media_root = os.path.join(settings.MEDIA_ROOT, "{0}/{1}".format("board", pk))
+        shutil.rmtree(media_root)
         messages.success(request, "Successfully deleted post")
     return redirect(reverse("board:board_list"))
 
@@ -93,7 +96,7 @@ def delete_photo(request, board_pk, photo_pk):
             photo = models.Photo.objects.get(pk=photo_pk)
             filepath = settings.MEDIA_ROOT + "{}".format(photo.files).replace(
                 "/media", ""
-            ).replace("/", "\\")
+            )
             os.remove(filepath)
             photo.delete()
             data = {"message": "Successfully deleted photo"}

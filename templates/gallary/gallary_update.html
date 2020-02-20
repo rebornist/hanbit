@@ -27,7 +27,7 @@
               <div class="form-group">
                 <label for="photos">Photo Upload</label>
                 <input type="file" class="form-control" id="photos" name="photos" multiple />
-                <div class="photo-thumb-list" style="display:flex;flex-wrap:wrap;align-self:center;">
+                <div class="photo-thumb-list" id="photo-delete-form" style="display:flex;flex-wrap:wrap;align-self:center;">
                 
                   {% for photo in gallary.get_photos %}
                   <div class="overlay-container" style="width:20%;padding:1px;display:flex;justify-content:center;align-items:center;">

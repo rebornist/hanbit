@@ -3,13 +3,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, JsonResponse
 from django.shortcuts import redirect, reverse
-from django.views.generic import DeleteView, DetailView, FormView, ListView, UpdateView
+from django.views.generic import DetailView, FormView, ListView, UpdateView
 
 from core.file_uploads import file_uploads
 from users import mixins as user_mixins
 from . import models
 from . import forms
 import os
+import shutil
 
 from hitcount.views import HitCountDetailView
 
@@ -78,6 +79,8 @@ def delete_post(request, pk):
         messages.error(request, "Cant delete that post")
     else:
         gallary.delete()
+        media_root = os.path.join(settings.MEDIA_ROOT, "{0}/{1}".format("gallary", pk))
+        shutil.rmtree(media_root)
         messages.success(request, "Successfully deleted post")
     return redirect(reverse("gallary:gallary_list"))
 
@@ -93,7 +96,7 @@ def delete_photo(request, gallary_pk, photo_pk):
             photo = models.Photo.objects.get(pk=photo_pk)
             filepath = settings.MEDIA_ROOT + "{}".format(photo.files).replace(
                 "/media", ""
-            ).replace("/", "\\")
+            )
             os.remove(filepath)
             photo.delete()
             data = {"message": "Successfully deleted photo"}

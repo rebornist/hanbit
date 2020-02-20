@@ -31,10 +31,10 @@
       <div class="col-md-6 col-lg-3 isotope-item site-building">
         <div class="image-box text-center">
           <div class="overlay-container img-md-center">
-            <img src="{% static 'img/hanbitchurch.jpg' %}" alt="" />
+            <img src="{{gallary.first_photo}}" alt="" />
             <div class="overlay-top">
               <div class="text">
-                <h3><a href="{% url 'gallary:detail' gallary.pk %}"">{{gallary.title}}</a></h3>
+                <h3><a href="{% url 'gallary:detail' gallary.pk %}">{{gallary.title}}</a></h3>
                 <p class="small">{{gallary.created}}</p>
               </div>
             </div>
